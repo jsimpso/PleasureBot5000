@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 
 import discord
+import asyncio
 from discord.ext import commands
+import requests
+import os
+
+bot_token = os.environ['bot_token']
+cat_token = os.environ['cat_token']
 
 bot = commands.Bot(command_prefix='^', description='Not a Hookerbot.')
+
 
 @bot.event
 async def on_ready():
@@ -12,6 +19,12 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-@bot.cmmands()
+
+@bot.command()
 async def cat(ctx):
-    await ctx.send("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+    payload = {'api_key': cat_token}
+    img = requests.get('http://thecatapi.com/api/images/get', json=payload)
+    await ctx.send(img.url)
+
+
+bot.run(bot_token)
