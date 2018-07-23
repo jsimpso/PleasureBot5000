@@ -24,5 +24,14 @@ async def cat(ctx):
     img = requests.get('http://thecatapi.com/api/images/get', json=payload)
     await ctx.send(img.url)
 
+@bot.command()
+async def dog(ctx):
+    img = requests.get('https://dog.ceo/api/breeds/image/random')
+    await ctx.send(img.json()['message'])
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send('Hello!')
+
 
 bot.run(bot_token)
