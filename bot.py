@@ -32,6 +32,11 @@ async def dog(ctx):
 @bot.command()
 async def hello(ctx):
     await ctx.send('Hello!')
+    
+    
+@bot.command()
+async def nancy(ctx):
+    await ctx.send("https://i.imgur.com/PCn05.jpg") 
 
 
 bot.run(bot_token)
