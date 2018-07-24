@@ -1,14 +1,25 @@
 #!/usr/bin/env python
 
 from discord.ext import commands
+from twython import Twython
 import requests
 import os
 
 bot_token = os.environ['bot_token']
 cat_token = os.environ['cat_token']
+consumer_key = os.environ['consumer_key']
+consumer_secret = os.environ['consumer_secret']
+access_token = os.environ['access_token']
+access_token_secret = os.environ['access_token_secret']
+
+twitter = Twython(
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
+)
 
 bot = commands.Bot(command_prefix='^', description='Not a Hookerbot.')
-
 
 @bot.event
 async def on_ready():
@@ -37,6 +48,16 @@ async def hello(ctx):
 @bot.command()
 async def nancy(ctx):
     await ctx.send("https://i.imgur.com/PCn05.jpg") 
+
+
+@bot.command()
+async def nancytweet():
+    message = "@Seeeeeeeev"
+    image = open('PCn05.jpg', 'rb')
+    response = twitter.upload_media(media=image)
+    media_id = [response['media_id']]
+    twitter.update_status(status=message, media_ids=media_id)
+    print("Tweeted: %s" % message)
 
 
 bot.run(bot_token)
