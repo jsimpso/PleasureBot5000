@@ -40,6 +40,15 @@ async def dog(ctx):
     img = requests.get('https://dog.ceo/api/breeds/image/random')
     await ctx.send(img.json()['message'])
 
+
+@bot.command()
+async def pups(ctx):
+    r = requests.get('https://dog.ceo/api/breeds/image/random')
+    print(r.json())
+    url = r.json()['message']
+    await ctx.send(url)
+
+
 @bot.command()
 async def hello(ctx):
     await ctx.send('Hello!')
