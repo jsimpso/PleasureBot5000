@@ -71,7 +71,7 @@ async def nancytweet(ctx):
     response = twitter.upload_media(media=image)
     media_id = [response['media_id']]
     twitter.update_status(status=message, media_ids=media_id)
-    ctx.send("Tweeted: %s" % message)
+    await ctx.send("Tweeted: %s" % message)
 
 
 bot.run(bot_token)
