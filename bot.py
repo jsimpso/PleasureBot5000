@@ -60,13 +60,13 @@ async def nancy(ctx):
 
 
 @bot.command()
-async def nancytweet():
+async def nancytweet(ctx):
     message = "@Seeeeeeeev"
     image = open('PCn05.jpg', 'rb')
     response = twitter.upload_media(media=image)
     media_id = [response['media_id']]
     twitter.update_status(status=message, media_ids=media_id)
-    print("Tweeted: %s" % message)
+    ctx.send("Tweeted: %s" % message)
 
 
 bot.run(bot_token)
