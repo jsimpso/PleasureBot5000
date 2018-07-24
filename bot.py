@@ -2,8 +2,10 @@
 
 from discord.ext import commands
 from twython import Twython
+from io import BytesIO
 import requests
 import os
+import urllib
 
 bot_token = os.environ['bot_token']
 cat_token = os.environ['cat_token']
@@ -18,6 +20,7 @@ twitter = Twython(
     access_token,
     access_token_secret
 )
+twitter.verify_credentials()
 
 bot = commands.Bot(command_prefix='^', description='Not a Hookerbot.')
 
@@ -61,8 +64,10 @@ async def nancy(ctx):
 
 @bot.command()
 async def nancytweet(ctx):
+    url = 'https://i.imgur.com/PCn05.jpg'
+    r = requests.get(url)
+    image = BytesIO(r.content)
     message = "@Seeeeeeeev"
-    image = open('PCn05.jpg', 'rb')
     response = twitter.upload_media(media=image)
     media_id = [response['media_id']]
     twitter.update_status(status=message, media_ids=media_id)
