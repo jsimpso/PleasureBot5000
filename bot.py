@@ -31,6 +31,10 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
+@bot.event
+async def on_message(message):
+  if str(message.author) == 'Nancy#5802' and "pineapple" in message.content.lower() and "pizza" in message.content.lower():  
+        await message.channel.send('https://i.imgur.com/PCn05.jpg')
 
 @bot.command()
 async def cat(ctx):
